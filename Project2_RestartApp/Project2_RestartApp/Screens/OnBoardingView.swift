@@ -9,6 +9,9 @@ import SwiftUI
 
 struct OnBoardingView: View {
     @AppStorage("onboarding") var isOnboardingViewActive: Bool = true
+    @State private var buttonWidth:Double = UIScreen.main.bounds.width - 80
+    @State private var buttonOffset: CGFloat = 0.0
+    
     var body: some View {
         ZStack {
             Color("ColorBlue")
@@ -28,14 +31,15 @@ struct OnBoardingView: View {
                     .foregroundColor(.white)
                     .multilineTextAlignment(.center)
                     .padding(.horizontal, 10)
-                    
                 }
+                
                 ZStack {
                     CircleGroupView(shapeColor: .white, shapeOpacity: 0.2)
                     Image("character-1")
                         .resizable()
                         .scaledToFit()
                 }
+                
                 ZStack {
                     Capsule()
                         .fill(Color.white.opacity(0.2))
@@ -52,7 +56,7 @@ struct OnBoardingView: View {
                     HStack {
                         Capsule()
                             .fill(Color("ColorRed"))
-                            .frame(width: 80)
+                            .frame(width: buttonOffset+80)
                         Spacer()
                     }
                     
@@ -65,18 +69,30 @@ struct OnBoardingView: View {
                                 .padding(8)
                             Image(systemName: "chevron.right.2")
                                 .font(.system(size: 24,weight: .bold))
-                            
-                            
                         }
                         .foregroundColor(.white)
                         .frame(width: 80,height: 80, alignment: .center)
-                        .onTapGesture {
-                            isOnboardingViewActive = false
-                        }
+                        .offset(x:buttonOffset)
+                        .gesture(
+                            DragGesture()
+                                .onChanged { gesture in
+                                    if gesture.translation.width > 0  && buttonOffset <= buttonWidth - 80 {
+                                        buttonOffset = gesture.translation.width
+                                    }
+                                }
+                                .onEnded { gesture in
+                                    if gesture.translation.width <= buttonWidth/2 {
+                                        buttonOffset = 0
+                                    } else {
+                                        buttonOffset = buttonWidth-80
+                                        isOnboardingViewActive = false
+                                    }
+                                }
+                        )
                         Spacer()
                     }
                 }
-                .frame(height:80, alignment: .center)
+                .frame(width: buttonWidth,height:80, alignment: .center)
                 .padding()
             }
         }
