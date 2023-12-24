@@ -8,56 +8,50 @@
 import SwiftUI
 
 struct ContentView: View {
+    @State private var isNight = false
+    var weekDayDetails: [WeekDayDetails] = [
+        .init(day: "MON", imageName: "cloud.sun.fill", temperature: 72),
+        .init(day: "TUE", imageName: "sun.max.fill", temperature: 70),
+        .init(day: "WED", imageName: "wind.snow", temperature: 71),
+        .init(day: "THUR", imageName: "snow", temperature: 76),
+        .init(day: "FRI", imageName: "cloud.sun.fill", temperature: 78),
+        .init(day: "SAT", imageName: "sunset.fill", temperature: 75)
+    ]
+
     var body: some View {
         ZStack {
-            
-            BackGroundView(topColor: .blue, 
-                           bottomColor: Color("LightBlue"))
+            BackGroundView(isNight: isNight)
             VStack {
                 CityTextView(cityName: "Cupertino, CA")
                 VStack(spacing: 10) {
-                    MainWeatherStatusView(imageName: "cloud.sun.fill", temperature: 76)
+                    MainWeatherStatusView(imageName:  isNight ? "moon.stars.fill" : "cloud.sun.fill", temperature: 76)
                 }
-                
                 HStack(spacing:10) {
-                    
-                    WeatherDayView(dayOfWeek: "MON", imageName: "cloud.sun.fill", temperature: 72)
-                    
-                    WeatherDayView(dayOfWeek: "TUE", imageName: "sun.max.fill", temperature: 70)
-                    
-                    WeatherDayView(dayOfWeek: "WED", imageName: "wind.snow", temperature: 71)
-                    
-                    WeatherDayView(dayOfWeek: "THUR", imageName: "snow", temperature: 72)
-                    
-                    WeatherDayView(dayOfWeek: "FRI", imageName: "cloud.sun.fill", temperature: 78)
-                    
-                    WeatherDayView(dayOfWeek: "SAT", imageName: "sunset.fill", temperature: 76)
-                    
+                    ForEach(weekDayDetails) { weekDayDetail in
+                        WeatherDayView(dayOfWeek: weekDayDetail.day, imageName: weekDayDetail.imageName, temperature: weekDayDetail.temperature)
+                    }
                 }
                 .padding()
-                
                 Spacer()
                 Button(action: {
                     print("Tapped")
+                    isNight.toggle()
                 }, label: {
                     WeatherButton(title: "Change Day Time",
                                   textColor: .blue,
                                   backgroundColor: .white)
                 })
                 Spacer()
-                
             }
         }
     }
 }
 
 struct BackGroundView: View {
-    
-    var topColor: Color
-    var bottomColor: Color
-    
+    var isNight: Bool
+
     var body: some View {
-        LinearGradient(gradient:Gradient(colors: [topColor, bottomColor]),
+        LinearGradient(gradient:Gradient(colors: [isNight ? .black : .blue, isNight ? .gray : Color("LightBlue")]),
                        startPoint: .topLeading,
                        endPoint: .bottomTrailing)
         .ignoresSafeArea()
@@ -66,6 +60,7 @@ struct BackGroundView: View {
 
 struct CityTextView: View {
     var cityName: String
+    
     var body: some View {
         Text(cityName)
             .font(.system(size: 32, weight: .medium, design: .default))
@@ -75,7 +70,6 @@ struct CityTextView: View {
 }
 
 struct MainWeatherStatusView: View {
-    
     var imageName: String
     var temperature: Int
     
@@ -93,7 +87,6 @@ struct MainWeatherStatusView: View {
 }
 
 struct WeatherDayView: View {
-    
     var dayOfWeek: String
     var imageName: String
     var temperature: Int

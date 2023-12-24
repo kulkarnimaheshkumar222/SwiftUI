@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1D773EBE2B38A63A002E4034 /* DataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D773EBD2B38A63A002E4034 /* DataModel.swift */; };
 		1DE4514A2B219FBA0038724F /* Project3_WeatherAppApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DE451492B219FBA0038724F /* Project3_WeatherAppApp.swift */; };
 		1DE4514C2B219FBA0038724F /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DE4514B2B219FBA0038724F /* ContentView.swift */; };
 		1DE4514E2B219FBC0038724F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1DE4514D2B219FBC0038724F /* Assets.xcassets */; };
@@ -15,6 +16,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		1D773EBD2B38A63A002E4034 /* DataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataModel.swift; sourceTree = "<group>"; };
 		1DE451462B219FBA0038724F /* Project3-WeatherApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Project3-WeatherApp.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		1DE451492B219FBA0038724F /* Project3_WeatherAppApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Project3_WeatherAppApp.swift; sourceTree = "<group>"; };
 		1DE4514B2B219FBA0038724F /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -58,6 +60,7 @@
 				1DE4514D2B219FBC0038724F /* Assets.xcassets */,
 				1DE4514F2B219FBC0038724F /* Preview Content */,
 				1DE451572B2237C80038724F /* WeatherButton.swift */,
+				1D773EBD2B38A63A002E4034 /* DataModel.swift */,
 			);
 			path = "Project3-WeatherApp";
 			sourceTree = "<group>";
@@ -141,6 +144,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				1DE4514C2B219FBA0038724F /* ContentView.swift in Sources */,
+				1D773EBE2B38A63A002E4034 /* DataModel.swift in Sources */,
 				1DE4514A2B219FBA0038724F /* Project3_WeatherAppApp.swift in Sources */,
 				1DE451582B2237C80038724F /* WeatherButton.swift in Sources */,
 			);
