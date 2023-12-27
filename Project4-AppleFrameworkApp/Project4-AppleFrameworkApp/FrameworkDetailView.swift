@@ -7,21 +7,15 @@
 
 import SwiftUI
 
-struct DetailView: View {
-    var framework: Framework
-    var body: some View {
-        FrameworkDetailView(framework: framework)
-    }
-}
-
 struct FrameworkDetailView: View {
     var framework: Framework
+    @Binding var isShowingDetailView: Bool
     var body: some View {
         VStack {
             HStack {
                 Spacer()
                 Button(action: {
-                    print("Dissmiss")
+                    isShowingDetailView = false
                 }, label: {
                     Image(systemName: "xmark")
                         .foregroundColor(Color(.label))
@@ -30,24 +24,19 @@ struct FrameworkDetailView: View {
                 })
             }
             .padding()
-            
             Spacer()
-            
             FrameworkTitleView(framework: framework)
-            
             Text(framework.description)
                 .font(.body)
                 .padding()
-            
             Spacer()
-            
             AFDefaultButton(title: "Learn More")
         }
     }
 }
 #Preview {
-    DetailView(framework: Framework(name:MockData.sampleFrameworks.name,
+    FrameworkDetailView(framework: Framework(name:MockData.sampleFrameworks.name,
                   imageName:MockData.sampleFrameworks.imageName,
                   urlString: MockData.sampleFrameworks.urlString,
-                  description:MockData.sampleFrameworks.description))
+                                    description:MockData.sampleFrameworks.description), isShowingDetailView: .constant(false))
 }

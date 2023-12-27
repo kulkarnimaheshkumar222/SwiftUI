@@ -11,6 +11,7 @@ struct FrameworkGridView: View {
     let columns: [GridItem] = [GridItem(.flexible()),
                                GridItem(.flexible()),
                                GridItem(.flexible())]
+    @StateObject var viewModel = FrameworkGridViewModel()
     
     var body: some View {
         NavigationStack {
@@ -18,18 +19,21 @@ struct FrameworkGridView: View {
                 LazyVGrid(columns: columns) {
                     ForEach(MockData.frameworks) { framework in
                         FrameworkTitleView(framework: framework)
+                            .onTapGesture {
+                                viewModel.selectedFramework = framework
+                            }
                     }
                 }
             }
             .navigationBarTitleDisplayMode(.large)
-            .navigationTitle("Test")
+            .navigationTitle("Framework")
+            .sheet(isPresented: $viewModel.isShowingDetailView) {
+                FrameworkDetailView(framework: viewModel.selectedFramework ?? MockData.sampleFrameworks, isShowingDetailView: $viewModel.isShowingDetailView)
+            }
+            
         }
         
     }
-}
-
-#Preview {
-    FrameworkGridView()
 }
 
 struct FrameworkTitleView: View {
@@ -47,4 +51,9 @@ struct FrameworkTitleView: View {
         }
         .padding()
     }
+}
+
+
+#Preview {
+    FrameworkGridView()
 }

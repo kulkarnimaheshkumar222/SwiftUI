@@ -11,10 +11,7 @@ import SwiftUI
 struct Project4_AppleFrameworkAppApp: App {
     var body: some Scene {
         WindowGroup {
-            DetailView(framework: Framework(name:MockData.sampleFrameworks.name,
-                                            imageName:MockData.sampleFrameworks.imageName,
-                                            urlString: MockData.sampleFrameworks.urlString,
-                                            description:MockData.sampleFrameworks.description))
+            FrameworkGridView()
         }
     }
 }
